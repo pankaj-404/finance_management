@@ -1,4 +1,5 @@
 import HeaderBox from "@/components/HeaderBox"
+import RightSidebar from "@/components/RightSidebar"
 import TotalBalanceBox from "@/components/TotalBalanceBox"
 
 const Home = async () => {
@@ -20,9 +21,10 @@ const Home = async () => {
               totalCurrentBalance={10000}
             />
           </header>
+          Recent Transactions
       </div>
-
-      
+      {/* @ts-ignore */}
+      <RightSidebar user={loggedIn} transactions={[]} banks={[{currentBalance: 4352.70},{ currentBalance: 9485.10}]} />
     </section>
   )
 }
