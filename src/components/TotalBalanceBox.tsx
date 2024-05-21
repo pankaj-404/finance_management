@@ -22,7 +22,7 @@ const TotalBalanceBox = ({accounts=[],totalBanks,totalCurrentBalance}: TotalBala
                 </p>
                 <p className="total-balance-amount flex-center gap-2">
                     <CountUp 
-                        duration={1}
+                        duration={2}
                         start={counterBalance > 0 ? counterBalance: 0 }
                         end={totalCurrentBalance} 
                         decimal='.' 
