@@ -6,7 +6,7 @@ import DoughnutChart from './DoughnutChart'
 import { chartSampleData } from '@/constants'
 
 const TotalBalanceBox = ({accounts=[],totalBanks,totalCurrentBalance}: TotalBalanceBoxProps) => {
-    const counterBalance = (totalCurrentBalance - 100) || 0
+    const counterBalance = (totalCurrentBalance - 200) || 0
     return (
     <section className="total-balance">
         <div className="total-balance-chart">
@@ -22,7 +22,7 @@ const TotalBalanceBox = ({accounts=[],totalBanks,totalCurrentBalance}: TotalBala
                 </p>
                 <p className="total-balance-amount flex-center gap-2">
                     <CountUp 
-                        duration={2}
+                        duration={1.5}
                         start={counterBalance > 0 ? counterBalance: 0 }
                         end={totalCurrentBalance} 
                         decimal='.' 
