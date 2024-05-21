@@ -13,7 +13,7 @@ const Sidebar = ({user}: SidebarProps) => {
   return (
     <section className='sidebar'>
         <nav className='flex flex-col gap-4'>
-            <Link href="#" className="mb-12 flex cursor-pointer items-center gap-2" >
+            <Link href="/" className="mb-12 flex cursor-pointer items-center gap-2" >
                 <Image 
                     src="/icons/logo.svg" 
                     alt="logo" 
@@ -24,7 +24,7 @@ const Sidebar = ({user}: SidebarProps) => {
             </Link>
             {
                 sidebarLinks?.map((link) => {
-                    const isActive = pathName === link?.route || pathName?.startsWith(link?.route)
+                    const isActive = pathName === link?.route || pathName?.startsWith(`${link?.route}/`)
                     return (
                     <Link href={link?.route} key={link.label} className={cn('sidebar-link',{
                         'bg-bank-gradient': isActive
