@@ -15,6 +15,7 @@ import {Form} from "@/components/ui/form"
 import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils';
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions';
+import PlaidLink from './PlaidLink';
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -73,7 +74,7 @@ const AuthForm = ({type}: {type: "sign-in" | "sign-up"}) => {
           if(response) router.push('/')
         }
       } catch (error) {
-        console.log(error);
+        console.log("Error in onSubmit: ", error);
       } finally {
         setIsLoading(false);
       }
@@ -102,7 +103,7 @@ const AuthForm = ({type}: {type: "sign-in" | "sign-up"}) => {
         </header>
         {user? (
             <div className="flex flex-col gap-4">
-                PlaidLink
+                <PlaidLink user={user} variant="primary" />
             </div>
         ): (
             <>
