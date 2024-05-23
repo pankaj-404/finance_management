@@ -128,6 +128,12 @@ export const transactionCategoryStyles = {
     textColor: "text-[#027A48]",
     chipBackgroundColor: "bg-[#ECFDF3]",
   },
+  Travel: {
+    borderColor: "border-[#0047AB]",
+    backgroundColor: "bg-blue-500",
+    textColor: "text-blue-700",
+    chipBackgroundColor: "bg-blue-50",
+  },
   default: {
     borderColor: "",
     backgroundColor: "bg-blue-500",
@@ -136,12 +142,12 @@ export const transactionCategoryStyles = {
   },
 };
 
-export const chartSampleData = {
-  labels: ["Bank1", "Bank2", "Bank3"],
+export const chartData = {
+  labels: [],
   datasets: [
     {
-      label: "# of Votes",
-      data: [12000, 5999, 30000],
+      label: "Banks",
+      data: [],
       backgroundColor: [
         "rgba(255, 99, 132, 1)",
         "rgba(54, 162, 235, 1)",
@@ -159,6 +165,7 @@ export const chartSampleData = {
         "rgba(255, 159, 64, 1)",
       ],
       borderWidth: 1,
+      tension: 0.5,
     },
   ],
 };
