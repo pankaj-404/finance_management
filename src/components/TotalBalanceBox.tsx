@@ -3,10 +3,8 @@
 import React from 'react'
 import CountUp from 'react-countup'
 import DoughnutChart from './DoughnutChart'
-import { chartSampleData } from '@/constants'
 
 const TotalBalanceBox = ({accounts=[],totalBanks,totalCurrentBalance}: TotalBalanceBoxProps) => {
-    const counterBalance = (totalCurrentBalance - 200) || 0
     return (
     <section className="total-balance">
         <div className="total-balance-chart">
@@ -23,11 +21,11 @@ const TotalBalanceBox = ({accounts=[],totalBanks,totalCurrentBalance}: TotalBala
                 <p className="total-balance-amount flex-center gap-2">
                     <CountUp 
                         duration={1.5}
-                        start={counterBalance > 0 ? counterBalance: 0 }
+                        start={(totalCurrentBalance - 100 > 0) ? totalCurrentBalance - 100 : 0}
                         end={totalCurrentBalance} 
                         decimal='.' 
                         decimals={2} 
-                        prefix='INR' 
+                        prefix='$' 
                     />
                     
                 </p>

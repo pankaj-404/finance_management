@@ -74,7 +74,7 @@ const AuthForm = ({type}: {type: "sign-in" | "sign-up"}) => {
           if(response) router.push('/')
         }
       } catch (error) {
-        console.log("Error in onSubmit: ", error);
+        console.error("Error in onSubmit: ", error);
       } finally {
         setIsLoading(false);
       }
