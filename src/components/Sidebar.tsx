@@ -22,7 +22,7 @@ const Sidebar = ({user}: SidebarProps) => {
                     width={30} 
                     height={30} 
                     className='size-[24px] max-xl:size-14 '  />
-                <h1 className='sidebar-logo' >Banking</h1>
+                <h1 className='sidebar-logo' >FIN-GENIE</h1>
             </Link>
             {
                 sidebarLinks?.map((link) => {

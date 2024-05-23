@@ -90,7 +90,7 @@ const AuthForm = ({type}: {type: "sign-in" | "sign-up"}) => {
                     width={30}
                     height={30}
                 />
-                <h1 className='text-26 font-ibm-plex-serif font-bold text-black-1' >Banking</h1>
+                <h1 className='text-26 font-ibm-plex-serif font-bold text-black-1' >FIN-GENIE</h1>
             </Link>
             <div className="flex flex-col gap-1 md:gap-3">
                 <h1 className='text-24 lg:text-36 font-semibold text-gray-900'>

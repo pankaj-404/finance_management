@@ -32,10 +32,10 @@ const BankCard = ({account, userName, showBalance = true}: CreditCardProps ) => 
                 </article>
             </div>
             <div className="bank-card_icon">
-                <Image src="/icons/paypass.svg" alt="pay" width={24} height={24} />
-                <Image src="/icons/mastercard.svg" alt="mastercard" width={24} height={24} className='ml-5' />
+                <Image src="../assets/icons/Paypass.svg" alt="pay" width={24} height={24} />
+                <Image src="../assets/icons/mastercard.svg" alt="mastercard" width={24} height={24} className='ml-5' />
             </div>
-            <Image src="/icons/lines.png" alt="lines" width={316} height={190} className='absolute top-0 left-0' />
+            <Image src="../assets/icons/lines.png" alt="lines" width={316} height={190} className='absolute top-0 left-0' />
         </Link>
         {/* ts-ignore */}
         {showBalance && <Copy title={account?.shareableId || account?.sharaebleId || " "} />}
