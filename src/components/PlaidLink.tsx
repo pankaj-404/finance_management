@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { createLinkToken, exchangePublicToken } from '@/lib/actions/user.actions';
 
-const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
+const  PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter();
 
   const [token, setToken] = useState('');
