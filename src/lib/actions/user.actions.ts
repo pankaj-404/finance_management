@@ -1,13 +1,9 @@
 "use server";
 
 import { ID, Query } from "node-appwrite";
-import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
-
 import { createAdminClient, createSessionClient } from "../appwrite";
+import { cookies } from "next/headers";
 import { encryptId, extractCustomerIdFromUrl, parseStringify } from "../utils";
-
-import { plaidClient } from "@/lib/plaid";
 import {
   CountryCode,
   ProcessorTokenCreateRequest,
@@ -15,6 +11,8 @@ import {
   Products,
 } from "plaid";
 
+import { plaidClient } from "@/lib/plaid";
+import { revalidatePath } from "next/cache";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
 
 const {
@@ -44,16 +42,16 @@ export const signIn = async ({ email, password }: signInProps) => {
     const { account } = await createAdminClient();
     const session = await account.createEmailPasswordSession(email, password);
 
-    // cookies().set("appwrite-session", session.secret, {
-    //   path: "/",
-    //   httpOnly: true,
-    //   sameSite: "strict",
-    //   secure: true,
-    // });
+    cookies().set("appwrite-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
 
-    // const user = await getUserInfo({ userId: session.userId });
+    const user = await getUserInfo({ userId: session.userId });
 
-    return parseStringify(session);
+    return parseStringify(user);
   } catch (error) {
     console.error("Error in sign in: ", error);
   }
@@ -117,9 +115,9 @@ export async function getLoggedInUser() {
     const { account } = await createSessionClient();
     const result = await account.get();
 
-    // const user = await getUserInfo({ userId: result.$id });
+    const user = await getUserInfo({ userId: result.$id });
 
-    return parseStringify(result);
+    return parseStringify(user);
   } catch (error) {
     console.error("Error in getLoggedInUser: ", error);
     return null;
@@ -246,7 +244,61 @@ export const exchangePublicToken = async ({
     revalidatePath("/");
 
     // Return a success message
-    return parseStringify({ publicTokenExchange: "complete" });
+    return parseStringify({
+      publicTokenExchange: "complete",
+    });
+  } catch (error) {
+    console.error("An error occurred while creating exchanging token:", error);
+  }
+};
+
+export const getBanks = async ({ userId }: getBanksProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const banks = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    );
+
+    return parseStringify(banks.documents);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getBank = async ({ documentId }: getBankProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const bank = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("$id", [documentId])]
+    );
+
+    return parseStringify(bank.documents[0]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getBankByAccountId = async ({
+  accountId,
+}: getBankByAccountIdProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const bank = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("accountId", [accountId])]
+    );
+
+    if (bank.total !== 1) return null;
+
+    return parseStringify(bank.documents[0]);
   } catch (error) {
     console.error("An error occurred while creating exchanging token: ", error);
   }
